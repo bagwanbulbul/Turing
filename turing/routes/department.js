@@ -12,9 +12,14 @@ product.get("/get",function(req,res){
     })
 })
 
-// product.get("/get/:id",function(req,res){
-//     let department_id=req.params.department_id
-//     let response.then
-// })
+product.get("/get/:department_id",function(req,res){
+    let department_id=req.params.department_id
+    let response=add.getDataById(department_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 module.exports = product
