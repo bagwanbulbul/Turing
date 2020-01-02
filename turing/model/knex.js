@@ -4,8 +4,13 @@ const knex = require("../conection.js")
 
 // }
 
-let gettData = ()=>{
-    return knex.select("*").from("department")
 
+let getData = (i)=>{
+    return knex.select("*").from("department")
 }
-module.exports=gettData
+let getDataById=(department_id)=>{
+    return knex.select("*").from("department").where("department_id",department_id)
+}
+
+
+module.exports={getData,getDataById}
