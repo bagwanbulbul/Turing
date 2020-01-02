@@ -9,7 +9,7 @@ var knex = require("knex")({
         host : 'localhost',
         user : 'root',
         password : 'navgurukul',
-        database : 'salesTax'
+        database : 'turing_project'
     }
 });
 console.log("database is conected")
