@@ -14,5 +14,11 @@ let getCategoryById=(category_id)=>{
     return knex.select("*").from("category").where("category_id",category_id)
 }
 
+let joinTable = ()=>{
+    return knex.select("*").from("category").join("product_category",{"product_category.product_id":"category.category_id"})
+    // return knex.from("category").innerJoin("product_category","category.category_id","product_category.product_id")
+}
 
-module.exports={getData,getDataById,getCategoryData,getCategoryById}
+
+
+module.exports={getData,getDataById,getCategoryData,getCategoryById,joinTable}
