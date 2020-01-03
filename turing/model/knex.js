@@ -18,8 +18,10 @@ let selectData = (product_id)=>{
     return knex.select("category.category_id","category.department_id", "category.name").from("category").join("product_category","product_category.product_id","category.category_id").where("product_id",product_id)
     
 }
+let selectDataByDepartmentID = (department_id)=>{
+    return knex.select("category_id","name","description","department_id").from("category").where("department_id",department_id)
+} 
 
 
 
-
-module.exports={getData,getDataById,getCategoryData,getCategoryById,selectData}
+module.exports={getData,getDataById,getCategoryData,getCategoryById,selectData,selectDataByDepartmentID}
