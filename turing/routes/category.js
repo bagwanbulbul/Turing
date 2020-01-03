@@ -21,13 +21,15 @@ product.get("/get/:category_id",function(req,res){
         res.send(err)
     })
 })
-product.get("/joinTables",function(req,res){
-    let response = add.joinTable()
+product.get("/inProduct/:product_id",function(req,res){
+    let product_id=req.params.product_id
+    let response = add.selectData(product_id)
     response.then((data)=>{
         res.send(data)
     }).catch((err)=>{
         res.send(err)
     })
 })
+
 
 module.exports = product
