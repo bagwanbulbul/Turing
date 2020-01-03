@@ -21,5 +21,13 @@ product.get("/get/:category_id",function(req,res){
         res.send(err)
     })
 })
+product.get("/joinTables",function(req,res){
+    let response = add.joinTable()
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 module.exports = product
