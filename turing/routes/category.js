@@ -30,6 +30,15 @@ product.get("/inProduct/:product_id",function(req,res){
         res.send(err)
     })
 })
+product.get("/inDepartment/:department_id",function(req,res){
+    let department_id=req.params.department_id
+    let response = add.selectDataByDepartmentID(department_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 
 module.exports = product
