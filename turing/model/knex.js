@@ -22,6 +22,13 @@ let selectDataByDepartmentID = (department_id)=>{
     return knex.select("category_id","name","description","department_id").from("category").where("department_id",department_id)
 } 
 
+let attributeData = ()=>{
+    return knex.select("*").from("attribute")
+}
+let attributeDataByID=(attribute_id)=>{
+    return knex.select("*").from("attribute").where("attribute_id",attribute_id)
+}
 
 
-module.exports={getData,getDataById,getCategoryData,getCategoryById,selectData,selectDataByDepartmentID}
+
+module.exports={getData,getDataById,getCategoryData,getCategoryById,selectData,selectDataByDepartmentID,attributeData,attributeDataByID}
