@@ -14,7 +14,7 @@ product.get("/get",function(req,res){
 
 product.get("/get/:attribute_id",function(req,res){
     let attribute_id=req.params.attribute_id
-    let response=add.attributeDataByID(attribute_id)
+    let response=add.attributeValue(attribute_id)
     response.then((data)=>{
         res.send(data)
     }).catch((err)=>{
