@@ -6,7 +6,7 @@ app.use("/department",department);
 const category=require("./routes/category");
 app.use("/category",category)
 
-app.listen(4000,()=>{
-    console.log("server is listening 4000 ....")
+app.listen(3000,()=>{
+    console.log("server is listening 3000 ....")
 
 });
