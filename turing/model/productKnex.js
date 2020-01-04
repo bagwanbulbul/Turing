@@ -13,5 +13,8 @@ let productData = ()=>{
 let productByID = (product_id)=>{
     return knex.select("*").from("product").where("product_id",product_id)
 }
+let productCategory = (category_id)=>{
+    return knex.select("*").from("product").join("product_category","product_category.product_id","product.product_id").where("category_id",category_id)
+}
 
-module.exports={productData,productByID}
+module.exports={productData,productByID,productCategory}
