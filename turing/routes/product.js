@@ -11,9 +11,9 @@ product.get("/get",function(req,res){
         res.send(err)
     })
 })
-product.get("/:product_id",function(req,res){
-    let product_id = req.params.product_id
-    let response = add.productByID(product_id)
+product.get("/inCategory/:category_id",function(req,res){
+    let category_id = req.params.category_id
+    let response = add.productCategory(category_id)
     response.then((data)=>{
         res.send(data)
     }).catch((err)=>{
