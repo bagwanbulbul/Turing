@@ -11,4 +11,13 @@ product.get("/get",function(req,res){
         res.send(err)
     })
 })
+product.get("/:product_id",function(req,res){
+    let product_id = req.params.product_id
+    let response = add.productByID(product_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 module.exports = product
