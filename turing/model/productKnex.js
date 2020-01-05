@@ -3,6 +3,9 @@ const knex = require("../conection.js")
 let productData = ()=>{
     return knex.select("*").from("product")
 }
+let productByID=(product_id)=>{
+    return knex.select("*").from("product").where("product_id",product_id)
+}
 
 let add_query = (name,limit)=>{
     return knex.select("*").from('product').where("name",name).where("limit",limit)
@@ -32,4 +35,4 @@ let reviewData=(review,product_id)=>{
 let selectReviewData = (product_id)=>{
     return knex.select("product.name","review.review","review.rating","review.created_on").from("review").join("product","product.product_id","review.product_id").where("product_id",product_id)
 }
-module.exports={productData,productCategory,productDepartment,add_query,productDetails,productLocation,reviewData,selectReviewData}
+module.exports={productData,productByID,productCategory,productDepartment,add_query,productDetails,productLocation,reviewData,selectReviewData}
