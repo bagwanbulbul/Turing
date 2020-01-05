@@ -7,9 +7,10 @@ let productByID=(product_id)=>{
     return knex.select("*").from("product").where("product_id",product_id)
 }
 
-let add_query = (name,limit)=>{
-    return knex.select("*").from('product').where("name",name).where("limit",limit)
-
+var searchProduct = (product_name,limit)=>{
+    return knex.select(" product.product_id", "product.name", "product.description", "product.price", "product.discounted_price" , "product.thumbnail").from("product").limit(limit)
+    .where("name",product_name)
+    
 }
 
 let productCategory = (category_id)=>{
@@ -25,7 +26,7 @@ let productDetails = (product_id)=>{
 }
 
 let productLocation = (product_id)=>{
-    return knex.select("category.category_id","category.name","department.department_id","department.name").from("department").join("category","category.department_id","department.department_id").join("product").where("product_id",product_id)
+    return knex.select("category.category_id","category.name","department.department_id","department.name").from("category").join("department","department.department_id","category.category_id").join("product").where("product_id",product_id)
 }
 
 let reviewData=(review,product_id)=>{
@@ -33,6 +34,6 @@ let reviewData=(review,product_id)=>{
 }
 
 let selectReviewData = (product_id)=>{
-    return knex.select("product.name","review.review","review.rating","review.created_on").from("review").join("product","product.product_id","review.product_id").where("product_id",product_id)
+    return knex.select("product.name","review.review","review.rating","review.created_on").from("product").join("review","review.review_id","product.product_id").where("product_id",product_id)
 }
-module.exports={productData,productByID,productCategory,productDepartment,add_query,productDetails,productLocation,reviewData,selectReviewData}
+module.exports={productData,productByID,searchProduct,productCategory,productDepartment,productDetails,productLocation,reviewData,selectReviewData}
