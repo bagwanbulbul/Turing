@@ -11,6 +11,16 @@ product.get("/get",function(req,res){
         res.send(err)
     })
 })
+product.get("/:product_id",function(req,res){
+    let product_id=req.params.product_id
+    let response=add.productByID(product_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
 product.get("/inCategory/:category_id",function(req,res){
     let category_id = req.params.category_id
     let response = add.productCategory(category_id)
@@ -70,7 +80,7 @@ product.post("/:product_id/review",function(req,res){
             "rating":req.body.rating,
             "created_on":req.body.created_on 
         }
-        review["product_id"]=product_id
+        // review["product_id"]=product_id
     let response = add.reviewData(review,product_id)
     response.then((data)=>{
         return res.send(data)
