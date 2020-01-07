@@ -28,4 +28,12 @@ customer.post("/post",function(req,res){
         console.log(err);
     })
 })
+customer.get("/get",function(req,res){
+    let response =  add.getCustomerData()
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 module.exports = customer
