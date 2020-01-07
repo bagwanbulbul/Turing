@@ -2,6 +2,7 @@ const express = require('express');
 var customer = express.Router();
 customer.use(express.json())
 const add = require("../model/customerKnex");
+const jwt = require('json-web-token')
 
 
 customer.post("/post",function(req,res){
@@ -51,6 +52,38 @@ customer.put("/update/:customer_id",function(req,res){
         return res.json(data)
     }).catch((err)=>{
         console.log(err);
+    })
+})
+customer.post("/login",function(req,res){
+    let email=req.body.email
+    let password=req.body.password
+    let response= add.logIn()
+    response.then((data)=>{
+        for(let i=0; i<data.length; i++){
+            if ((data[i]["email"]==email) && (data[i]["password"]==password)){
+                let token = jwt.sign({"user":data},"neha")
+                res.cookie(token)
+            }
+        }
+    })
+})
+customer.put("/address",function(req,res){
+    let updateAddress = {
+        "address_1":req.body.address_1,
+        "address_2":req.body.address_2,
+        "city":req.body.city,
+        "region":req.body.region,
+        "postal_code":req.body.postal_code,
+        "country":req.body.country,
+        "shipping_region_id":req.body.shipping_region_id
+    }
+    let response =add.updateAddress(updateAddress)
+    response.then((data)=>{
+        let token = jwt.sign({"user":data},"neha")
+        res.cookie(token)
+
+    }).catch((err)=>{
+        res.send(err)
     })
 })
 
