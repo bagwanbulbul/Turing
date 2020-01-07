@@ -36,4 +36,22 @@ customer.get("/get",function(req,res){
         res.send(err)
     })
 })
+customer.put("/update/:customer_id",function(req,res){
+    let customer_id=req.params.customer_id
+    let updateData = {"name":req.body.name,
+        "email":req.body.email,
+        "password":req.body.password,
+        "day_phone":req.body.day_phone,
+        "eve_phone":req.body.eve_phone,
+        "mob_phone":req.body.mob_phone 
+
+    }
+    let response = add.updateCustomerData(customer_id,updateData)
+    response.then((data)=>{
+        return res.json(data)
+    }).catch((err)=>{
+        console.log(err);
+    })
+})
+
 module.exports = customer
