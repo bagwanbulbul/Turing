@@ -3,5 +3,7 @@ const knex = require("../conection.js")
 let customerData=(customerDetails)=>{
     return knex("customer").insert(customerDetails)
 }
-
-module.exports={customerData}
+let getCustomerData = ()=>{
+    return knex.select("*").from("customer")
+}
+module.exports={customerData,getCustomerData}
