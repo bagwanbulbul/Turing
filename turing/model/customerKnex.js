@@ -6,4 +6,7 @@ let customerData=(customerDetails)=>{
 let getCustomerData = ()=>{
     return knex.select("*").from("customer")
 }
-module.exports={customerData,getCustomerData}
+let updateCustomerData=(customer_id,updateData)=>{
+    return knex("customer").where("customer_id",customer_id).update(updateData)
+}
+module.exports={customerData,getCustomerData,updateCustomerData}
