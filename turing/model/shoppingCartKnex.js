@@ -12,6 +12,9 @@ let genrateUniqueId=()=>{
 let updateShoppingCartData=(item_id)=>{
     return knex.select("shopping_cart.item_id","product.name","shopping_cart.attributes","product.product_id","product.price","shopping_cart.quantity").from("shopping_cart").join("product","product.product_id","shopping_cart.product_id").where("item_id",item_id)
 }
-module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData}
+let deleteData=(cart_id)=>{
+    return knex("shopping_cart").where("cart_id",cart_id).del()
+}
+module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData,deleteData}
 
 // "shopping_cart.item_id","product.name","shopping_cart.attribute","product.product_id","product.price","shopping_cart.quantity"
