@@ -114,6 +114,15 @@ shoppingCart.get("/getSaved/:cart_id",function(req,res){
         res.send(err)
     })
 })
+shoppingCart.delete("/removeProduct/:item_id",function(req,res){
+    let item_id=req.params.item_id
+    let response=add.removeProduct(item_id)
+    response.then((data)=>{
+        res.json(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 
 module.exports=shoppingCart
