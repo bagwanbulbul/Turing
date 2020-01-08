@@ -27,6 +27,9 @@ let insertData=(data)=>{
 let removeData=(item_id)=>{
     return knex.select("*").from("shopping_cart").where("item_id",item_id).del()
 }
-module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData,deleteData,totalAmmount,getData,insertData,removeData}
+let getSaved=(cart_id)=>{
+    return knex.select("product.name","shopping_cart.item_id","shopping_cart.attributes","product.price").from("shopping_cart").join("product","product.product_id","shopping_cart.product_id").where("cart_id",cart_id)
+}
+module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData,deleteData,totalAmmount,getData,insertData,removeData,getSaved}
 
 // "shopping_cart.item_id","product.name","shopping_cart.attribute","product.product_id","product.price","shopping_cart.quantity"
