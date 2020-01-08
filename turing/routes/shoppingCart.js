@@ -105,6 +105,15 @@ shoppingCart.get("/saveForLater/:item_id",function(req,res){
         res.send(err)
     })
 })
+shoppingCart.get("/getSaved/:cart_id",function(req,res){
+    let cart_id=req.params.cart_id
+    let response=add.getSaved(cart_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 
 module.exports=shoppingCart
