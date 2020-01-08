@@ -38,6 +38,7 @@ shoppingCart.get("/:cart_id",function(req,res){
     let cart_id=req.params.cart_id
     let response=add.shoppingById(cart_id)
     response.then((data)=>{
+        // console.log(data)
         res.send(data)
     }).catch((err)=>{
         res.send(err)
@@ -50,7 +51,7 @@ shoppingCart.put("/update/:item_id",function(req,res){
         let price = data[0]["price"]
         let quantity=data[0]["quantity"]
         data["subtotal"]=price*quantity
-        data = {"iteam_id":data[0]["iteam_id"],
+        data = {"item_id":data[0]["item_id"],
                 "name":data[0]["name"],
                 "attributes":data[0]["attributes"],
                 "product_id":data[0]["product_id"],
@@ -74,6 +75,23 @@ shoppingCart.delete("/empty/:cart_id",function(req,res){
         console.log(err)
     })
 })
+
+shoppingCart.get("/totalAmmount/:cart_id",function(req,res){
+    let cart_id=req.params.cart_id
+    let response = add.totalAmmount(cart_id)
+    response.then((data)=>{
+        let price = data[0]["price"]
+        let quantity=data[0]["quantity"]
+        data["subtotal"]=price*quantity
+        data = {
+                "total":data["subtotal"]
+
+        }
+        return res.json(data);
+    }).catch((err)=>{
+        console.log(err);
+    })
+});
 
 module.exports=shoppingCart
 
