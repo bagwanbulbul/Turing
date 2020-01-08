@@ -94,5 +94,23 @@ customer.put("/address",function(req,res){
         })
     })
 })
+customer.put("/creaditcard",function(req,res){
+    let alltoken=req.headers.cookie
+    var tokenList = alltoken.split("=undefined; ")
+    let token_list =  tokenList[tokenList.length - 2]
+    jwt.verify(token_list,"bulbul", (err,data) => {
+        let customer_id = req.body.customer_id
+        let updateData = {credit_card:req.body.credit_card
+        }
+        let response =add.updatecreaditcard(updateData,customer_id)
+            response.then((data)=>{
+                res.json(data)
+    
+        }).catch((err)=>{
+            res.send(err)
+        })
+    })
+})
+
 
 module.exports = customer
