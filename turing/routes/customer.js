@@ -2,7 +2,7 @@ const express = require('express');
 var customer = express.Router();
 customer.use(express.json())
 const add = require("../model/customerKnex");
-const jwt = require('json-web-token')
+const jwt = require('jsonwebtoken')
 
 
 customer.post("/post",function(req,res){
@@ -54,6 +54,7 @@ customer.put("/update/:customer_id",function(req,res){
         console.log(err);
     })
 })
+
 customer.post("/login",function(req,res){
     let email=req.body.email
     let password=req.body.password
@@ -61,29 +62,36 @@ customer.post("/login",function(req,res){
     response.then((data)=>{
         for(let i=0; i<data.length; i++){
             if ((data[i]["email"]==email) && (data[i]["password"]==password)){
-                let token = jwt.sign({"user":data},"neha")
-                res.cookie(token)
-            }
+                let token = jwt.sign({"user":data}, "bulbul" );
+                res.cookie(token); // add cookie here
+                res.json({token})
+              } 
         }
     })
 })
-customer.put("/address",function(req,res){
-    let updateAddress = {
-        "address_1":req.body.address_1,
-        "address_2":req.body.address_2,
-        "city":req.body.city,
-        "region":req.body.region,
-        "postal_code":req.body.postal_code,
-        "country":req.body.country,
-        "shipping_region_id":req.body.shipping_region_id
-    }
-    let response =add.updateAddress(updateAddress)
-    response.then((data)=>{
-        let token = jwt.sign({"user":data},"neha")
-        res.cookie(token)
 
-    }).catch((err)=>{
-        res.send(err)
+customer.put("/address",function(req,res){
+    let alltoken=req.headers.cookie
+    var tokenList = alltoken.split("=undefined; ")
+    let token_list =  tokenList[tokenList.length - 2]
+    jwt.verify(token_list,"bulbul", (err,data) => {
+        let customer_id = req.body.customer_id
+        let updateData = {
+            "address_1":req.body.address_1,
+            "address_2":req.body.address_2,
+            "city":req.body.city,
+            "region":req.body.region,
+            "postal_code":req.body.postal_code,
+            "country":req.body.country,
+            "shipping_region_id":req.body.shipping_region_id
+        }
+        let response =add.updateAddress(updateData,customer_id)
+            response.then((data)=>{
+                res.json(data)
+    
+        }).catch((err)=>{
+            res.send(err)
+        })
     })
 })
 
