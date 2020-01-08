@@ -2,6 +2,21 @@ const express = require('express');
 var shoppingCart = express.Router();
 shoppingCart.use(express.json())
 const add = require("../model/shoppingCartKnex");
+const uniqueId = require("random-string")
+const uniqueIdFunction = uniqueId()
+
+shoppingCart.get("/genrateUniqueId",function(req,res){
+    let response = add.genrateUniqueId()
+    response.then((data)=>{
+        var cart_id={
+            "cart_id":uniqueIdFunction
+        }
+        res.send(cart_id)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
 
 shoppingCart.post("/add",function(req,res){
   let  details={
@@ -28,6 +43,7 @@ shoppingCart.get("/:cart_id",function(req,res){
         res.send(err)
     })
 })
+
 
 module.exports=shoppingCart
 
