@@ -16,8 +16,6 @@ shoppingCart.get("/genrateUniqueId",function(req,res){
         res.send(err)
     })
 })
-
-
 shoppingCart.post("/add",function(req,res){
   let  details={
     cart_id:req.body.cart_id,
@@ -92,6 +90,22 @@ shoppingCart.get("/totalAmmount/:cart_id",function(req,res){
         console.log(err);
     })
 });
+shoppingCart.get("/saveForLater/:item_id",function(req,res){
+    let item_id=req.params.item_id
+    let getData=add.getData(item_id)
+    getData.then((data)=>{
+       let insert=add.insertData(data)
+       insert.then((result)=>{
+            let deleteTableData = add.removeData(item_id)
+            deleteTableData.then((response)=>{
+                res.json(response)
+            })
+        })
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
+
 
 module.exports=shoppingCart
 
