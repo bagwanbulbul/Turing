@@ -12,7 +12,7 @@ let updateCustomerData=(customer_id,updateData)=>{
 let logIn=()=>{
     return knex.select("*").from("customer")
 }
-let updateAddress=()=>{
-    return knex("customer").update()
+let updateAddress=(updateData,customer_id)=>{
+    return knex("customer").where("customer_id",customer_id).update(updateData)
 }
 module.exports={customerData,getCustomerData,updateCustomerData,logIn,updateAddress}
