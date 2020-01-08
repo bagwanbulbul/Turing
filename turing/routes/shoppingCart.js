@@ -65,6 +65,15 @@ shoppingCart.put("/update/:item_id",function(req,res){
         console.log(err);
     })
 });
+shoppingCart.delete("/empty/:cart_id",function(req,res){
+    let cart_id=req.params.cart_id
+    let response=add.deleteData(cart_id)
+    response.then((data)=>{
+         res.json(data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+})
 
 module.exports=shoppingCart
 
