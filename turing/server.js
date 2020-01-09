@@ -12,6 +12,9 @@ app.use("/attribute",attribute)
 const product = require("./routes/product");
 app.use("/product",product)
 
+const orders=require("./routes/order");
+app.use("/orders",orders)
+
 // const tax = require("./routes/tax");
 // app.use("/tax",tax)
 
@@ -20,6 +23,9 @@ app.use("/product",product)
 
 const customer = require("./routes/customer")
 app.use("/customer",customer)
+
+const shoppingCart = require("./routes/shoppingCart")
+app.use("/shoppingCart",shoppingCart)
 
 
 app.listen(4000,()=>{
