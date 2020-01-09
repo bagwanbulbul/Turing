@@ -15,11 +15,11 @@ app.use("/product",product)
 const orders=require("./routes/order");
 app.use("/orders",orders)
 
-// const tax = require("./routes/tax");
-// app.use("/tax",tax)
+const tax = require("./routes/tax");
+app.use("/tax",tax)
 
-// const shipping = require("./routes/shipping")
-// app.use("/shipping",shipping)
+const shipping = require("./routes/shipping")
+app.use("/shipping",shipping)
 
 const customer = require("./routes/customer")
 app.use("/customer",customer)
