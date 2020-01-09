@@ -28,7 +28,6 @@ orders.get("/:cart_id",function(req,res){
             res.send(result)
 
         })
-        // return res.json(data);
     }).catch((err)=>{
         console.log(err);
     })
@@ -37,12 +36,33 @@ orders.get("/get/:order_id",function(req,res){
     let order_id = req.params.order_id
     let response = add.orderDetailData(order_id)
     response.then((data)=>{
-        res.send(data)
+        shortOrderDetails={
+            "order_id":data[0]["order_id"],
+            "product_id":data[0]["product_id"],
+            "attributes":data[0]["attributes"],
+            "product_name":data[0]["name"],
+            "quantity":data[0]["quantity"],
+            "unit_cost":data[0]["price"]
+        }
+        var insertData = add.orderDetailsInsert(shortOrderDetails)
+        insertData.then((resp)=>{
+            res.send("data posted...")
+        })
+//         res.send(data)
     }).catch((err)=>{
         console.log(err)
     })
 })
 
+orders.get("/inCutomers",function(req,res){
+    let response = add.orderInCustomer()
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+
+})
 orders.get("/shortDetail/:order_id",function(req,res){
     let order_id=req.params.order_id
     let response=add. shortDetail(order_id)
