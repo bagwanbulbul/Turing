@@ -33,5 +33,24 @@ orders.get("/:cart_id",function(req,res){
         console.log(err);
     })
 });
+orders.get("/get/:order_id",function(req,res){
+    let order_id = req.params.order_id
+    let response = add.orderDetailData(order_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        console.log(err)
+    })
+})
+
+orders.get("/shortDetail/:order_id",function(req,res){
+    let order_id=req.params.order_id
+    let response=add. shortDetail(order_id)
+    response.then((data)=>{
+        res.send(data)
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 module.exports=orders
