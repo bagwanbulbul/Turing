@@ -33,6 +33,15 @@ let getSaved=(cart_id)=>{
 let removeProduct=(item_id)=>{
     return knex.select("product.name","shopping_cart.item_id","shopping_cart.attributes","product.price").from("shopping_cart").join("product","product.product_id","shopping_cart.product_id").where("item_id",item_id).del()
 }
-module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData,deleteData,totalAmmount,getData,insertData,removeData,getSaved,removeProduct}
+let getMoveTocartData=(item_id)=>{
+    return knex.select("*").from("save_for").where("item_id",item_id)
+}
+let insertMoveTocartData = (data)=>{
+    return knex.select("*").from("shopping_cart").insert(data)
+}
+let removeMoveTocartData=(item_id)=>{
+    return knex.select("*").from("save_for").where("item_id",item_id).del()
+}
+module.exports={shoppingCartData,shoppingById,genrateUniqueId,updateShoppingCartData,deleteData,totalAmmount,getData,insertData,removeData,getSaved,removeProduct,getMoveTocartData,insertMoveTocartData,removeMoveTocartData}
 
 // "shopping_cart.item_id","product.name","shopping_cart.attribute","product.product_id","product.price","shopping_cart.quantity"
