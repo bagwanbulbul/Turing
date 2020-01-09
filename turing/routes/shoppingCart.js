@@ -123,6 +123,21 @@ shoppingCart.delete("/removeProduct/:item_id",function(req,res){
         res.send(err)
     })
 })
+shoppingCart.get("/moveTocart/:item_id",function(req,res){
+    let item_id=req.params.item_id
+    let getData=add.getMoveTocartData(item_id)
+    getData.then((data)=>{
+       let insert=add.insertMoveTocartData(data)
+       insert.then((result)=>{
+            let deleteTableData = add.removeMoveTocartData(item_id)
+            deleteTableData.then((response)=>{
+                res.json(response)
+            })
+        })
+    }).catch((err)=>{
+        res.send(err)
+    })
+})
 
 
 module.exports=shoppingCart
