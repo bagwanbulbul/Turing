@@ -18,4 +18,5 @@ let updateAddress=(updateData,customer_id)=>{
 let updatecreaditcard=(updateData,customer_id)=>{
     return knex("customer").where("customer_id",customer_id).update(updateData)
 }
+
 module.exports={customerData,getCustomerData,updateCustomerData,logIn,updateAddress,updatecreaditcard}
