@@ -1,7 +1,7 @@
 const express = require('express');
 var orders = express.Router();
 orders.use(express.json())
-const add = require("../model/orderKnex");
+const add = require("../model/orderDb");
 
 orders.get("/:cart_id",function(req,res){
     let cart_id=req.params.cart_id

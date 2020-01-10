@@ -1,7 +1,7 @@
 const express = require('express');
 var shoppingCart = express.Router();
 shoppingCart.use(express.json())
-const add = require("../model/shoppingCartKnex");
+const add = require("../model/shoppingCartDb");
 const uniqueId = require("random-string")
 const uniqueIdFunction = uniqueId()
 

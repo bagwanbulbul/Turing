@@ -1,7 +1,7 @@
 const express = require('express');
 var department = express.Router();
 department.use(express.json())
-const add = require("../model/departmentKnex");
+const add = require("../model/departmentDb");
 
 department.get("/get",function(req,res){
     let response =  add.getData()

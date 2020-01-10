@@ -1,7 +1,7 @@
 const express = require('express');
 var product = express.Router();
 product.use(express.json())
-const add = require("../model/productKnex");
+const add = require("../model/productDb");
 
 product.get("/get",function(req,res){
     let response =  add.productData()
@@ -62,16 +62,7 @@ product.get("/search/:limit/:product_name/:length",(req,res)=>{
        res.send(err)
    })
 });
-// product.get("/search/:name/:limit",function(req,res){
-//     let  name= req.params.name
-//     let description_limit = req.params.description_limit
-//     let response=add.add_query(name,description_limit)
-//     response.then((data)=>{
-//         res.send(data)
-//     }).catch((err)=>{
-//         res.send(err)
-//     })
-// })
+
 
 product.get("/:product_id/details",function(req,res){
     let product_id = req.params.product_id

@@ -1,7 +1,7 @@
 const express = require('express');
 var tax = express.Router();
 tax.use(express.json())
-const add = require("../model/taxKnex");
+const add = require("../model/taxDb");
 
 tax.get("/get",function(req,res){
     let response =  add.taxData()

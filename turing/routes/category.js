@@ -1,10 +1,10 @@
 const express = require('express');
 var category = express.Router();
 category.use(express.json())
-const add = require("../model/categoryKnex");
+const add = require("../model/categoryDb");
 
 category.get("/get",function(req,res){
-    let response =  add.getData()
+    let response =  add. getCategoryData()
     response.then((data)=>{
         res.send(data)
     }).catch((err)=>{

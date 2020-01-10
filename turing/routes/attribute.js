@@ -1,7 +1,7 @@
 const express = require('express');
 var attribute = express.Router();
 attribute.use(express.json())
-const add = require("../model/attributeKnex");
+const add = require("../model/attributeDb");
 
 attribute.get("/get",function(req,res){
     let response =  add.attributeData()

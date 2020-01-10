@@ -1,7 +1,7 @@
 const express = require('express');
 var customer = express.Router();
 customer.use(express.json())
-const add = require("../model/customerKnex");
+const add = require("../model/customerDb");
 const jwt = require('jsonwebtoken')
 
 

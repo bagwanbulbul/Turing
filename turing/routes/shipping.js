@@ -1,7 +1,7 @@
 const express = require('express');
 var shipping = express.Router();
 shipping.use(express.json())
-const add = require("../model/shippingKnex");
+const add = require("../model/shippingDb");
 
 shipping.get("/get",function(req,res){
     let response =  add.shippingData()
